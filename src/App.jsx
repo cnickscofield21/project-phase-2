@@ -1,6 +1,9 @@
 import {useEffect, useState} from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Home  from "./components/Home";
+import About  from "./components/About";
+import Contact  from "./components/Contact";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import RecipeCard from "./components/RecipeCard";
@@ -9,7 +12,7 @@ function App() {
     const [recipes, setRecipes] = useState([]);
     
     useEffect(() => {
-        const dbJson = "http://localhost:3000/meals"; // 
+        const dbJson = "http://localhost:4201/meals"; // 
         // const mealDB = "http://www.themealdb.com/api/json/v1/1/search.php?f=a"; // External Meal DB
         fetch(dbJson)
         .then(res => res.json())
@@ -26,12 +29,9 @@ function App() {
     return (
         <>
             <Header />
-            <h1 className="text-3xl font-bold text-red-400 text-left">
-                Mobile Menu
-            </h1>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home recipeRow={recipeRow}/>} />
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                         {/* Watch video on programmatic navigation 
@@ -48,31 +48,6 @@ function App() {
                         */}
                 </Routes>
             </Router>
-
-            <h2>Recipe Group 1</h2>
-            <div className="carousel w-100 carousel-right max-w-md p-0 space-x-0">
-                {recipeRow}
-            </div>
-
-            <h2>Recipe Group 2</h2>
-            <div className="carousel w-100 carousel-right max-w-md p-4 space-x-4">
-                {recipeRow}
-            </div>
-
-            <h2>Recipe Group 3</h2>
-            <div className="carousel w-100 carousel-right max-w-md p-4 space-x-4">
-                {recipeRow}
-            </div>
-
-            <h2>Recipe Group 4</h2>
-            <div className="carousel w-100 carousel-right max-w-md p-4 space-x-4">
-                {recipeRow}
-            </div>
-
-            <h2>Recipe Group 5</h2>
-            <div className="carousel w-100 carousel-right max-w-md p-4 space-x-4">
-                {recipeRow}
-            </div>
             <Footer />
         </>
     );
